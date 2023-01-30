@@ -1,0 +1,117 @@
+{
+  "name": "frontend-applications",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/frontend/applications/src",
+  "prefix": "apps",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/angular:webpack-browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/frontend/applications",
+        "index": "apps/frontend/applications/src/index.html",
+        "main": "apps/frontend/applications/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/frontend/applications/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          "apps/frontend/applications/src/favicon.ico",
+          "apps/frontend/applications/src/assets",
+          {
+            "glob": "**/*",
+            "input": "node_modules/@ant-design/icons-angular/src/inline-svg/",
+            "output": "/assets/"
+          }
+        ],
+        "styles": [
+          "node_modules/ng-zorro-antd/ng-zorro-antd.css",
+          "node_modules/ng-zorro-antd/ng-zorro-antd.dark.css",
+          "apps/frontend/applications/src/styles.scss"
+        ],
+        "scripts": [],
+        "customWebpackConfig": {
+          "path": "apps/frontend/applications/webpack.config.js"
+        }
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all",
+          "customWebpackConfig": {
+            "path": "apps/frontend/applications/webpack.prod.config.js"
+          }
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@nrwl/angular:webpack-dev-server",
+      "configurations": {
+        "production": {
+          "browserTarget": "frontend-applications:build:production"
+        },
+        "development": {
+          "browserTarget": "frontend-applications:build:development"
+        }
+      },
+      "defaultConfiguration": "development",
+      "options": {
+        "port": 4201,
+        "publicHost": "http://localhost:4201"
+      }
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "frontend-applications:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "apps/frontend/applications/**/*.ts",
+          "apps/frontend/applications/**/*.html"
+        ]
+      }
+    },
+    "serve-static": {
+      "executor": "@nrwl/angular:file-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "frontend-applications:build",
+        "port": 4201
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "frontend-applications:build:development"
+        },
+        "production": {
+          "buildTarget": "frontend-applications:build:production"
+        }
+      }
+    }
+  },
+  "tags": []
+}

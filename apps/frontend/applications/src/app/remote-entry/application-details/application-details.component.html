@@ -1,0 +1,14 @@
+<rubber-outlet>
+  <ui-header
+    [title]="application?.title"
+    [description]="application?.userProperties!['description']"
+    [avatar]="{url: application?.icon}"
+    [back]="['..']"
+  >
+    <nz-button-group extra [nzSize]="'small'">
+      <button nz-button [nzType]="'default'" [routerLink]="['report']" [routerLinkActive]="'primary'" [relativeTo]="route">
+        <span nz-icon nzType="bug" nzTheme="outline"></span>
+      </button>
+    </nz-button-group>
+  </ui-header>
+</rubber-outlet>

@@ -1,0 +1,20 @@
+{
+  "name": "frontend-ui",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/frontend/ui/src",
+  "prefix": "glue",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/frontend/ui/**/*.ts",
+          "libs/frontend/ui/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

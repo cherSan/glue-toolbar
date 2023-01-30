@@ -14,7 +14,11 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@launchpad/frontend/core": ["libs/frontend/core/src/index.ts"],
+      "@launchpad/frontend/glue": ["libs/frontend/glue/src/index.ts"],
+      "@launchpad/frontend/ui": ["libs/frontend/ui/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

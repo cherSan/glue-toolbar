@@ -1,0 +1,108 @@
+{
+  "name": "frontend-workspaces",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/frontend/workspaces/src",
+  "prefix": "wsp",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/angular:webpack-browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/frontend/workspaces",
+        "index": "apps/frontend/workspaces/src/index.html",
+        "main": "apps/frontend/workspaces/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/frontend/workspaces/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          "apps/frontend/workspaces/src/favicon.ico",
+          "apps/frontend/workspaces/src/assets"
+        ],
+        "styles": ["apps/frontend/workspaces/src/styles.scss"],
+        "scripts": [],
+        "customWebpackConfig": {
+          "path": "apps/frontend/workspaces/webpack.config.js"
+        }
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all",
+          "customWebpackConfig": {
+            "path": "apps/frontend/workspaces/webpack.prod.config.js"
+          }
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@nrwl/angular:webpack-dev-server",
+      "configurations": {
+        "production": {
+          "browserTarget": "frontend-workspaces:build:production"
+        },
+        "development": {
+          "browserTarget": "frontend-workspaces:build:development"
+        }
+      },
+      "defaultConfiguration": "development",
+      "options": {
+        "port": 4202,
+        "publicHost": "http://localhost:4202"
+      }
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "frontend-workspaces:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "apps/frontend/workspaces/**/*.ts",
+          "apps/frontend/workspaces/**/*.html"
+        ]
+      }
+    },
+    "serve-static": {
+      "executor": "@nrwl/angular:file-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "frontend-workspaces:build",
+        "port": 4202
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "frontend-workspaces:build:development"
+        },
+        "production": {
+          "buildTarget": "frontend-workspaces:build:production"
+        }
+      }
+    }
+  },
+  "tags": []
+}

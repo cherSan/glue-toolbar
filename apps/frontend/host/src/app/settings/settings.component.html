@@ -1,0 +1,45 @@
+<rubber-outlet>
+  <div>
+    <ui-header
+      [title]="'Settings'"
+      [avatar]="{text: 'M'}"
+      [back]='[".."]'
+    >
+      <nz-button-group extra [nzSize]="'small'">
+        <button nz-button [nzType]="'default'" (click)='feedback()'>
+          <span nz-icon nzType="bug" nzTheme="outline"></span>
+        </button>
+        <button nz-button [nzType]="'default'" [routerLink]="[{outlets: {process: 'information'}}]" [routerLinkActive]="'primary'" [relativeTo]="route.root">
+          <span nz-icon nzType="info" nzTheme="outline"></span>
+        </button>
+      </nz-button-group>
+    </ui-header>
+    <nz-descriptions [nzBordered]="true" [nzColumn]="1" [nzSize]="'small'">
+      <nz-descriptions-item [nzTitle]="'User'">{{user}}</nz-descriptions-item>
+      <nz-descriptions-item [nzTitle]="'Region'">{{region}}</nz-descriptions-item>
+      <nz-descriptions-item [nzTitle]="'Environment'">{{env}}</nz-descriptions-item>
+      <nz-descriptions-item [nzTitle]="'Version'">{{version}}</nz-descriptions-item>
+    </nz-descriptions>
+
+    <form nz-form [formGroup]="form" (ngSubmit)="submitForm()">
+      <nz-form-item>
+        <nz-form-label [nzSpan]="18">Show Guide on Start</nz-form-label>
+        <nz-form-control [nzSpan]="6">
+          <nz-switch [formControl]='showGuide'></nz-switch>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="18">Bloomberg Bridge</nz-form-label>
+        <nz-form-control [nzSpan]="6">
+          <nz-switch [formControl]='bloombergBridge'></nz-switch>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="18">Group windows</nz-form-label>
+        <nz-form-control [nzSpan]="6">
+          <nz-switch [formControl]='groupWindows'></nz-switch>
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+  </div>
+</rubber-outlet>

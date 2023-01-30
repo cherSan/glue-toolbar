@@ -1,0 +1,34 @@
+<div [class]='"notification-container"'>
+  <router-outlet [name]='"notification"'></router-outlet>
+</div>
+<div
+  [class]='"process-container"'
+  [class.active]='isProcessActive'
+>
+  <div
+    pSizeObserver
+    class='outlet'
+  >
+    <router-outlet
+      [name]='"process"'
+      (activate)="isProcessActive = true"
+      (deactivate)="isProcessActive = false"
+    ></router-outlet>
+  </div>
+</div>
+<div [class]='"panel"'>
+  <div
+    pSizeObserver
+    [class]='"main-container"'
+    [@active]='isMainContainerCollapsed ? "void" : (isMainContainerMouseOver || rubberActivate)'
+    (mouseenter)='isMainContainerMouseOver = true'
+    (mouseleave)='isMainContainerMouseOver = false'
+  >
+    <div
+      [@switchService]='weight'
+      [class]='"outlet"'
+    >
+      <router-outlet #primaryOutlet='outlet' (activate)="activate(primaryOutlet)"></router-outlet>
+    </div>
+  </div>
+</div>

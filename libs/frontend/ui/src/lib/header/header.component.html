@@ -1,0 +1,31 @@
+<div
+  class="logo"
+  (mouseenter)="hover = true"
+  (mouseleave)="hover = false"
+>
+  <ng-container *ngIf="!hover || !back; else backTpl">
+    <ng-container *ngIf="$any(avatar)?.url || $any(avatar)?.text || $any(avatar)?.icon; else noAvatarTpl">
+      <nz-avatar *ngIf="$any(avatar)?.url" [nzSize]="30" [nzSrc]="$any(avatar).url"></nz-avatar>
+      <nz-avatar *ngIf="$any(avatar)?.text" [nzSize]="30" [nzText]="$any(avatar).text"></nz-avatar>
+      <nz-avatar *ngIf="$any(avatar)?.icon" [nzSize]="30" [nzIcon]="$any(avatar).icon"></nz-avatar>
+    </ng-container>
+    <ng-template #noAvatarTpl>
+      <nz-avatar [nzSize]="30" [nzText]="title?.substring(0,2)?.toUpperCase()"></nz-avatar>
+    </ng-template>
+  </ng-container>
+  <ng-template #backTpl>
+    <nz-avatar *ngIf="back" [routerLink]="back" [nzSize]="30" [nzIcon]="'arrow-left'" class="pointer"></nz-avatar>
+  </ng-template>
+</div>
+<div class="title">
+  <h5 nz-typography>
+    {{title}}
+  </h5>
+  <span nz-typography [nzType]="'secondary'">{{description}}</span>
+</div>
+<div class="extra">
+  <ng-content select="[extra]"></ng-content>
+</div>
+<div class="footer">
+  <ng-content></ng-content>
+</div>

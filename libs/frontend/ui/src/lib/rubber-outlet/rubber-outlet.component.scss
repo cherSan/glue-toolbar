@@ -1,0 +1,20 @@
+:host {
+  width: fit-content;
+  display: grid;
+  height: 100%;
+  max-height: 100%;
+  grid-template-columns: fit-content(0) fit-content(0);
+}
+.router-container {
+  height: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+  &.bordered {
+    border-left: 1px solid #666;
+  }
+}
+.current-container {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}

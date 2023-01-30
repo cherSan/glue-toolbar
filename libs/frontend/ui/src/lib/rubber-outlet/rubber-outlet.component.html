@@ -1,0 +1,14 @@
+<div [class]="'current-container'">
+  <ng-content></ng-content>
+</div>
+<div
+  [@rubber]='state'
+  [class]='"router-container"'
+  [class.bordered]='state.value && state.value !== "void"'
+>
+  <router-outlet
+    #outlet="outlet"
+    (activate)="activate(outlet)"
+    (deactivate)="deactivate()"
+  ></router-outlet>
+</div>

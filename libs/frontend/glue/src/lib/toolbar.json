@@ -1,0 +1,72 @@
+[
+  {
+    "shell": true,
+    "autoStart": true,
+    "title": "Launchpad",
+    "type": "window",
+    "name": "launchpad",
+    "ignoreSaveOnClose": true,
+    "details": {
+      "zoom": {
+        "enabled": false
+      },
+      "startLocation": {
+        "location": "center",
+        "stuck": false
+      },
+      "url": "http://localhost:4201",
+      "height": 400,
+      "width": 400,
+      "mode": "html",
+      "focus": true,
+      "isSticky": false,
+      "hasSizeAreas": false,
+      "hasMoveAreas": false,
+      "allowExtract": false,
+      "allowMinimize": false,
+      "allowCollapse": false,
+      "allowMaximize": false,
+      "allowClose": false,
+      "maximizable": false,
+      "minimizable": false,
+      "onTop": false
+    },
+    "customProperties": {
+      "includeInCanvas": false,
+      "includeInWorkspaces": false
+    }
+  },
+  {
+    "autoStart": true,
+    "title": "Save Tab",
+    "type": "window",
+    "name": "save-tab",
+    "ignoreSaveOnClose": true,
+    "details": {
+      "zoom": {
+        "enabled": false
+      },
+      "startLocation": {
+        "location": "center",
+        "stuck": false
+      },
+      "url": "http://localhost:4202",
+      "height": 42,
+      "width": 400,
+      "mode": "html",
+      "focus": true,
+      "onTop": true,
+      "hidden": true,
+      "isSticky": false,
+      "hasSizeAreas": false,
+      "hasMoveAreas": false,
+      "allowExtract": false,
+      "allowMinimize": false,
+      "allowCollapse": false,
+      "allowMaximize": false,
+      "allowClose": false,
+      "maximizable": false,
+      "minimizable": false
+    }
+  }
+]

@@ -1,0 +1,5 @@
+{
+  "frontend-applications": "http://localhost:4201",
+  "frontend-workspaces": "http://localhost:4202",
+  "frontend-information": "http://localhost:4210"
+}

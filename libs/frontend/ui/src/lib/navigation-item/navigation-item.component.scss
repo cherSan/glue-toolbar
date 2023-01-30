@@ -1,0 +1,107 @@
+@mixin transition-mix($property: all, $duration: 0.2s, $timing: linear, $delay: 0s) {
+  transition-property: $property;
+  transition-duration: $duration;
+  transition-timing-function: $timing;
+  transition-delay: $delay;
+}
+
+@mixin position-absolute ($top: null, $left: null, $right: null, $bottom: null) {
+  position: absolute;
+  top: $top;
+  left: $left;
+  right: $right;
+  bottom: $bottom;
+}
+:host {
+  position: relative;
+  display: grid;
+  grid-template-columns: 50px 1fr fit-content(0);
+  grid-template-rows: fit-content(0);
+  grid-template-areas: "logo title extra";
+  box-sizing: border-box;
+  overflow: hidden;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  width: 100%;
+  cursor: pointer;
+  transition: .5s;
+
+  &:after {
+    @include position-absolute($top: 0, $right: 0);
+    @include transition-mix($property: width);
+    display: block;
+    width: 0;
+    height: 100%;
+    content: '';
+    background-color: rgba(255,255,255, .1);
+    z-index: -2;
+  }
+  &:before {
+    @include position-absolute($top: 0, $left: 0);
+    @include transition-mix($property: width);
+    display: block;
+    width: 0;
+    height: 100%;
+    content: '';
+    background-color: #1890ff;
+    z-index: -1;
+  }
+  &:hover {
+    color: transparent;
+    &:after {
+      width: 100%
+    }
+
+    &:before {
+      width: 5px;
+    }
+  }
+  &.active {
+    &:before {
+      @include position-absolute($top: 0, $left: 0);
+      display: block;
+      width: 5px;
+      height: 100%;
+      content: '';
+      background-color: #1890ff;
+      z-index: -1;
+    }
+  }
+}
+.logo {
+  grid-area: logo;
+  align-self: center;
+  justify-self: center;
+  display: block;
+
+  .pointer {
+    cursor: pointer;
+  }
+}
+.title {
+  grid-area: title;
+  min-width: 1px;
+  height: 100%;
+  align-self: center;
+  display: grid;
+  grid-template-rows: 1fr fit-content(0);
+  h5 {
+    min-width: 1px;
+    margin-bottom: 0;
+    align-self: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+.extra {
+  grid-area: extra;
+  align-self: end;
+  width: fit-content;
+  height: 100%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: flex;
+  padding-right: 8px;
+  align-items: center;
+}
