@@ -1,10 +1,11 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {GlueService} from "@launchpad/frontend/glue";
+import {HeaderComponent, RubberOutlet} from "@launchpad/frontend/ui";
 
 @Component({
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RubberOutlet, HeaderComponent],
   templateUrl: './exit.component.html',
   styleUrls: ['./exit.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

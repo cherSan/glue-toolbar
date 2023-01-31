@@ -5,5 +5,5 @@ export * from './lib/navigation-item/navigation-item.component';
 export * from './lib/panel-element/panel-element.component';
 export * from './lib/container/container.component';
 export * from './lib/process/process.component';
-export * from './lib/notification/notification.component';
 export * from './lib/notification/notification.service';
+export * from './lib/notification/notification.interface';

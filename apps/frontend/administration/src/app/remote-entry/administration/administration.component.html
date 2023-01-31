@@ -1,0 +1,15 @@
+<rubber-outlet>
+  <ui-header
+    [title]="'Administration'"
+    [avatar]="{icon: 'mac-command'}"
+    [back]="['toolbar']"
+    [relativeTo]="route.root"
+  >
+  </ui-header>
+  <ui-navigation-item
+    [avatar]="{icon: 'notification'}"
+    [routerLinkActive]="'active'"
+    [routerLink]="['notification']"
+    [title]="'Send Notification'"
+  ></ui-navigation-item>
+</rubber-outlet>

@@ -1,0 +1,108 @@
+{
+  "name": "frontend-notifications",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/frontend/notifications/src",
+  "prefix": "ntf",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/angular:webpack-browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/frontend/notifications",
+        "index": "apps/frontend/notifications/src/index.html",
+        "main": "apps/frontend/notifications/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/frontend/notifications/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          "apps/frontend/notifications/src/favicon.ico",
+          "apps/frontend/notifications/src/assets"
+        ],
+        "styles": ["apps/frontend/notifications/src/styles.scss"],
+        "scripts": [],
+        "customWebpackConfig": {
+          "path": "apps/frontend/notifications/webpack.config.js"
+        }
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all",
+          "customWebpackConfig": {
+            "path": "apps/frontend/notifications/webpack.prod.config.js"
+          }
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@nrwl/angular:webpack-dev-server",
+      "configurations": {
+        "production": {
+          "browserTarget": "frontend-notifications:build:production"
+        },
+        "development": {
+          "browserTarget": "frontend-notifications:build:development"
+        }
+      },
+      "defaultConfiguration": "development",
+      "options": {
+        "port": 4211,
+        "publicHost": "http://localhost:4211"
+      }
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "frontend-notifications:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "apps/frontend/notifications/**/*.ts",
+          "apps/frontend/notifications/**/*.html"
+        ]
+      }
+    },
+    "serve-static": {
+      "executor": "@nrwl/angular:file-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "frontend-notifications:build",
+        "port": 4211
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "frontend-notifications:build:development"
+        },
+        "production": {
+          "buildTarget": "frontend-notifications:build:production"
+        }
+      }
+    }
+  },
+  "tags": []
+}

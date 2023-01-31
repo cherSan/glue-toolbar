@@ -1,0 +1,15 @@
+<ui-header
+  [title]="'Notifications'"
+  [back]="[{outlets: { notifications: null }}]"
+  [avatar]="{icon: 'notification'}"
+  [relativeTo]="route.root"
+></ui-header>
+<ng-container *ngIf="notifications.length; else noDataTpl">
+  <ntf-notification *ngFor="let notification of notifications" [notification]="notification">
+  </ntf-notification>
+</ng-container>
+<ng-template #noDataTpl>
+  <nz-empty
+    [nzNotFoundContent]="'No New Notification Yet'"
+  ></nz-empty>
+</ng-template>

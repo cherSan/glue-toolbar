@@ -1,5 +1,5 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, TemplateRef} from '@angular/core';
-import {HeaderComponent, NavigationItemComponent, NotificationService, RubberOutlet} from "@launchpad/frontend/ui";
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
+import {HeaderComponent, NavigationItemComponent, RubberOutlet} from "@launchpad/frontend/ui";
 import {NzButtonModule} from "ng-zorro-antd/button";
 import {ActivatedRoute, RouterLink, RouterLinkActive} from "@angular/router";
 import {NzIconModule} from "ng-zorro-antd/icon";
@@ -11,7 +11,6 @@ import {NzInputModule} from "ng-zorro-antd/input";
 import {NzSelectModule} from "ng-zorro-antd/select";
 import {FormsModule} from "@angular/forms";
 import {NzSegmentedModule, NzSegmentedOptions} from "ng-zorro-antd/segmented";
-
 @Component({
   standalone: true,
   imports: [
@@ -33,7 +32,9 @@ import {NzSegmentedModule, NzSegmentedOptions} from "ng-zorro-antd/segmented";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ApplicationsComponent implements OnInit, OnDestroy {
+  private readonly live$ = new Subject<void>();
   public applications: Glue42.AppManager.Application[] = [];
+  public readonly loading = new Set();
   public readonly options: NzSegmentedOptions = [
     {
       label: 'All',
@@ -44,13 +45,10 @@ export class ApplicationsComponent implements OnInit, OnDestroy {
       value: 'favorite',
     },
   ]
-  public readonly loading = new Set();
-  private readonly live$ = new Subject<void>();
   constructor(
     public readonly route: ActivatedRoute,
     private readonly glue: GlueService,
     private changeDetection: ChangeDetectorRef,
-    private notification: NotificationService
   ) {}
   ngOnInit() {
     this.glue.applications.applications$
@@ -66,12 +64,7 @@ export class ApplicationsComponent implements OnInit, OnDestroy {
     this.live$.next();
     this.live$.complete()
   }
-  start(application: Glue42.AppManager.Application, template: TemplateRef<any>) {
-    this.notification.addNotification({
-      type: 'info',
-      title: 'Application Will Start',
-      template
-    });
+  start(application: Glue42.AppManager.Application) {
     this.loading.add(application.name);
     const timePromise = new Promise(res => setTimeout(res, 5000));
     return Promise.race([application.start(), timePromise])

@@ -1,4 +1,15 @@
-<ui-notification></ui-notification>
+<div
+  pSizeObserver
+  [class]='"notifications-container"'
+  [class.active]='isIsNotificationsActive'
+  [@notifications]="isIsNotificationsActive"
+>
+  <router-outlet
+    [name]='"notifications"'
+    (activate)="isIsNotificationsActive = true"
+    (deactivate)="isIsNotificationsActive = false"
+  ></router-outlet>
+</div>
 <div
   [class]='"process-container"'
   [class.active]='isProcessActive'

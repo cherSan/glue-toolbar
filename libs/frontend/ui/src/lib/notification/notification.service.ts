@@ -1,12 +1,6 @@
-import {Injectable, TemplateRef} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Subject} from "rxjs";
-
-export type Notification = {
-  type: 'warning' | 'danger' | 'info' | 'blank' | 'success' | 'error';
-  title: string;
-  template: TemplateRef<void>;
-}
-
+import {Notification} from './notification.interface';
 @Injectable({
   providedIn: 'root'
 })

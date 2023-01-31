@@ -5,23 +5,20 @@
       [avatar]="{url: '/assets/m-logo.svg'}"
     >
       <nz-button-group extra [nzSize]="'small'">
-        <button
-          nz-button
-          [nzType]="'default'"
-          [routerLink]="['notification']"
-          [routerLinkActive]="'ant-btn-primary'"
-          [relativeTo]="route"
-        >
-          <span nz-icon nzType="notification" nzTheme="outline"></span>
+        <button nz-button [nzType]="'default'" (click)='feedback()'>
+          <span nz-icon nzType="bug" nzTheme="outline"></span>
+        </button>
+        <button nz-button [nzType]="'default'" [routerLink]="[{outlets: {process: 'information'}}]" [routerLinkActive]="'primary'" [relativeTo]="route.root">
+          <span nz-icon nzType="info" nzTheme="outline"></span>
         </button>
         <button
           nz-button
           [nzType]="'default'"
-          [routerLink]="['exit']"
+          [routerLink]="[{outlets: { notifications: 'list' }}]"
           [routerLinkActive]="'ant-btn-primary'"
-          [relativeTo]="route"
+          [relativeTo]="route.root"
         >
-          <span nz-icon nzType="logout" nzTheme="outline"></span>
+          <span nz-icon nzType="notification" nzTheme="outline"></span>
         </button>
       </nz-button-group>
       <nz-card
@@ -72,11 +69,27 @@
     <ui-navigation-item
       [title]='"Tabs"'
       [avatar]='{icon: "layout"}'
+      [routerLink]='["tabs"]'
+      [relativeTo]='route.root'
     ></ui-navigation-item>
     <ui-navigation-item
       [title]='"Settings"'
       [avatar]='{icon: "setting"}'
       [routerLink]='["settings"]'
+      [relativeTo]='route.root'
+      [routerLinkActive]="'active'"
+    ></ui-navigation-item>
+    <ui-navigation-item
+      [title]='"Administration"'
+      [avatar]='{icon: "mac-command"}'
+      [routerLink]='["administration"]'
+      [relativeTo]='route.root'
+      [routerLinkActive]="'active'"
+    ></ui-navigation-item>
+    <ui-navigation-item
+      [title]='"Exit"'
+      [avatar]='{icon: "logout"}'
+      [routerLink]='["exit"]'
       [relativeTo]='route.root'
       [routerLinkActive]="'active'"
     ></ui-navigation-item>

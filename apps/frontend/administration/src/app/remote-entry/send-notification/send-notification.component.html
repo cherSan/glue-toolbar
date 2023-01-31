@@ -1,0 +1,33 @@
+<rubber-outlet>
+  <ui-header
+    [title]="'Send Notification'"
+    [avatar]="{icon: 'notification'}"
+    [back]="['']"
+  >
+    <nz-button-group extra [nzSize]="'small'">
+      <button nz-button [nzType]="'default'" (click)='send(input.value)'>
+        <span nz-icon nzType="message" nzTheme="outline"></span>
+      </button>
+    </nz-button-group>
+    <input nz-input #input />
+  </ui-header>
+  <div class="applications">
+    <ng-container *ngFor="let application of applications">
+      <ui-navigation-item
+        [title]="application.title"
+        [avatar]="{url: application.icon}"
+        [description]="application.userProperties['category']"
+      >
+        <nz-button-group [nzSize]="'small'">
+          <button
+            nz-button
+            [nzType]="'default'"
+            (click)="sendApp(input.value, application)"
+          >
+            <span nz-icon nzType="message" nzTheme="outline"></span>
+          </button>
+        </nz-button-group>
+      </ui-navigation-item>
+    </ng-container>
+  </div>
+</rubber-outlet>

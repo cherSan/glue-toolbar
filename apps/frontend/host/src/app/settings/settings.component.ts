@@ -52,7 +52,4 @@ export class SettingsComponent {
   submitForm() {
 
   }
-  feedback() {
-    this.glueService.glue.feedback({ message: 'Feedback from settings' });
-  }
 }

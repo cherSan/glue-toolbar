@@ -75,15 +75,11 @@
     }
   }
 }
-.notification-container {
+.notifications-container {
   position: fixed;
-  top: 10px;
-  right: 10px;
-  width: 200px;
-  height: fit-content;
-  max-height: 100vh;
-
-  z-index: 3;
-
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 100vh;
   background: #222;
 }

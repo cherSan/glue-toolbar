@@ -2,7 +2,8 @@
   <ui-header
     [title]="'Applications'"
     [avatar]="{icon: 'appstore'}"
-    [back]="['']"
+    [back]="['toolbar']"
+    [relativeTo]="route.root"
   >
     <nz-segmented extra [nzOptions]="options"></nz-segmented>
     <nz-button-group extra [nzSize]="'small'">
@@ -42,13 +43,12 @@
         [routerLinkActive]="'active'"
         [relativeTo]="route"
       >
-        <ng-template #helloWorld><div>12321 3213213 213123213</div></ng-template>
         <nz-button-group [nzSize]="'small'">
           <button
             nz-button
             [nzType]="'default'"
             [nzLoading]="loading.has(application.name)"
-            (click)="start(application, helloWorld)"
+            (click)="start(application)"
             [class.ant-btn-primary]="application.instances.length"
             [disabled]="!!application.instances.length && !application.allowMultiple"
           >

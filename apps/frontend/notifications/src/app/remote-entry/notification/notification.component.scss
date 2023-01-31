@@ -1,20 +1,11 @@
 :host {
-  position: fixed;
-  right: 0;
-  top: 0;
-  width: 324px;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-.notification {
   transition: 1s;
   margin: 10px;
   padding: 10px;
   display: grid;
-  grid-template-rows: fit-content(0) fit-content(0);
+  grid-template-rows: fit-content(0) fit-content(0) fit-content(0);
   grid-template-columns: 40px 280px;
-  grid-template-areas: "icon title" "empty content";
+  grid-template-areas: "icon title" "empty content" "empty outlet";
   grid-gap: 4px;
 }
 .title {

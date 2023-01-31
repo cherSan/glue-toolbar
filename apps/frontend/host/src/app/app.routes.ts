@@ -3,6 +3,18 @@ import { loadRemoteModule } from '@nrwl/angular/mf';
 import {ToolbarComponent} from "./toolbar/toolbar.component";
 export const appRoutes: Route[] = [
   {
+    path: '',
+    redirectTo: 'toolbar',
+    pathMatch: 'full'
+  },
+  {
+    path: 'toolbar',
+    component: ToolbarComponent,
+    data: {
+      weight: 1
+    }
+  },
+  {
     path: 'applications',
     loadChildren: () =>
       loadRemoteModule('frontend-applications', './Routes').then(
@@ -23,27 +35,28 @@ export const appRoutes: Route[] = [
     }
   },
   {
-    path: '',
-    component: ToolbarComponent,
+    path: 'settings',
+    loadComponent: () => import('./settings/settings.component').then(c => c.SettingsComponent),
     data: {
-      weight: 1
-    },
-    children: [
-      {
-        path: 'settings',
-        loadComponent: () => import('./settings/settings.component').then(c => c.SettingsComponent),
-        data: {
-          width: 300
-        }
-      },
-      {
-        path: 'exit',
-        loadComponent: () => import('./exit/exit.component').then(c => c.ExitComponent),
-        data: {
-          width: 340
-        }
-      }
-    ]
+      weight: 0
+    }
+  },
+  {
+    path: 'administration',
+    loadChildren: () =>
+      loadRemoteModule('frontend-administration', './Routes').then(
+        (m) => m.remoteRoutes
+      ),
+    data: {
+      weight: 0
+    }
+  },
+  {
+    path: 'exit',
+    loadComponent: () => import('./exit/exit.component').then(c => c.ExitComponent),
+    data: {
+      weight: 0
+    }
   },
   {
     path: 'information',
@@ -60,5 +73,13 @@ export const appRoutes: Route[] = [
       loadRemoteModule('frontend-applications', './Routes').then(
         (m) => m.createApplicationRoute
       ),
+  },
+  {
+    path: 'list',
+    outlet: 'notifications',
+    loadChildren: () =>
+      loadRemoteModule('frontend-notifications', './Routes').then(
+        (m) => m.remoteRoutes
+      )
   }
 ];
