@@ -1,4 +1,4 @@
-<ng-container [ngSwitch]="notification.type">
+<ng-container [ngSwitch]="notificationValue.type">
   <span
     *ngSwitchCase="'success'"
     nz-icon
@@ -43,25 +43,59 @@
   ></span>
 </ng-container>
 
-<div class="title" [innerHTML]="notification.title"></div>
-<div class="content" [innerHTML]="notification.message"></div>
-<ng-container [ngSwitch]="notification.type">
-  <ng-container *ngSwitchCase="'layout'" [ngTemplateOutlet]="layoutTpl"></ng-container>
-  <ng-container *ngSwitchCase="'application'" [ngTemplateOutlet]="applicationTpl"></ng-container>
-  <ng-container *ngSwitchCase="'workspace'" [ngTemplateOutlet]="workspaceTpl"></ng-container>
-</ng-container>
+<div class="title" [innerHTML]="notificationValue.title"></div>
+<div class="content">
+  <ng-container *ngFor="let part of notificationMessage">
+    <ng-container
+      *ngIf="part.type === 'text'"
+      [ngTemplateOutlet]="textTpl"
+      [ngTemplateOutletContext]="{$implicit: part.data}"
+    ></ng-container>
+    <ng-container
+      *ngIf="part.type === 'application'"
+      [ngTemplateOutlet]="applicationTpl"
+      [ngTemplateOutletContext]="{$implicit: part.data}"
+    ></ng-container>
+    <ng-container
+      *ngIf="part.type === 'no-application'"
+      [ngTemplateOutlet]="noApplicationTpl"
+      [ngTemplateOutletContext]="{$implicit: part.data}"
+    ></ng-container>
+  </ng-container>
+</div>
+<ng-template #textTpl let-text>
+  <span [innerHTML]="text"></span>
+</ng-template>
 <ng-template #layoutTpl>
 
 </ng-template>
-<ng-template #applicationTpl>
+<ng-template #applicationTpl let-application>
   <button
     nz-button
     [nzType]="'link'"
-    *ngIf="notification.type === 'application'"
-    (click)="notification.data.application.start()"
+    (click)="application.start()"
   >
-    {{notification.data.application.title}}
+    <span nz-icon nzType="appstore" nzTheme="outline"></span>
+    {{application.title}}
   </button>
+</ng-template>
+<ng-template #noApplicationTpl let-application>
+  <span
+    nz-typography
+    nzType="warning"
+  >[You have no access to {{application.title}}</span>
+  <button
+    nz-button
+    [nzDanger]="true"
+    [nzType]="'link'"
+  >
+    <span nz-icon nzType="appstore" nzTheme="outline"></span>
+    Request
+  </button>
+  <span
+    nz-typography
+    nzType="warning"
+  >]</span>
 </ng-template>
 <ng-template #workspaceTpl>
 
