@@ -7,18 +7,20 @@ import {GlueService} from "@launchpad/frontend/glue";
 import {Subject, takeUntil, tap} from "rxjs";
 import {Glue42} from "@glue42/desktop";
 import {NgForOf} from "@angular/common";
+import {NzDescriptionsModule} from "ng-zorro-antd/descriptions";
 @Component({
   standalone: true,
-  imports: [
-    RubberOutlet,
-    HeaderComponent,
-    NzButtonModule,
-    RouterLink,
-    NzIconModule,
-    RouterLinkActive,
-    NavigationItemComponent,
-    NgForOf
-  ],
+    imports: [
+        RubberOutlet,
+        HeaderComponent,
+        NzButtonModule,
+        RouterLink,
+        NzIconModule,
+        RouterLinkActive,
+        NavigationItemComponent,
+        NgForOf,
+        NzDescriptionsModule
+    ],
   templateUrl: './application-details.component.html',
   styleUrls: ['./application-details.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

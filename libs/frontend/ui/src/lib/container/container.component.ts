@@ -56,7 +56,7 @@ import { RubberOutletService } from '../rubber-outlet/rubber-outlet.service';
             [
               style({ opacity: 1 }),
               animate(200, style({ opacity:0 })),
-            ],
+            ], { optional: true }
           ),
           query(
             ':enter',
@@ -71,7 +71,7 @@ import { RubberOutletService } from '../rubber-outlet/rubber-outlet.service';
                 background: '#222'
               }),
               animate(200, style({ top: '0' })),
-            ],
+            ], { optional: true }
           ),
         ]),
       ]),
@@ -82,7 +82,7 @@ import { RubberOutletService } from '../rubber-outlet/rubber-outlet.service';
             [
               style({ opacity: 1 }),
               animate(200, style({ opacity:0 })),
-            ],
+            ], { optional: true }
           ),
           query(
             ':enter',
@@ -97,7 +97,7 @@ import { RubberOutletService } from '../rubber-outlet/rubber-outlet.service';
                 background: '#222'
               }),
               animate(200, style({ top: '0' })),
-            ],
+            ], { optional: true }
           ),
         ]),
       ]),

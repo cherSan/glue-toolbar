@@ -1,20 +1,19 @@
 :host {
-  position: relative;
+  position: sticky;
+  top: 0;
   display: grid;
   grid-template-columns: 50px 1fr fit-content(0);
-  grid-template-rows: 48px fit-content(0);
+  grid-template-rows: fit-content(0) fit-content(0);
   grid-template-areas: "logo title extra" "empty footer footer";
   box-sizing: border-box;
   width: 100%;
-  padding-top: 5px;
-  padding-bottom: 5px;
+  padding-top: 10px;
+  margin-bottom: 10px;
   padding-right: 5px;
 }
 .logo {
   grid-area: logo;
-  align-self: center;
   justify-self: center;
-  display: block;
 
   .pointer {
     cursor: pointer;
@@ -24,12 +23,8 @@
   grid-area: title;
   min-width: 1px;
   height: 100%;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  align-self: center;
-  display: grid;
-  grid-template-rows: 1fr fit-content(0);
+  padding-top: 4px;
+  padding-bottom: 10px;
   h5 {
     margin: 0;
     padding: 0;
@@ -41,10 +36,7 @@
   align-self: end;
   width: fit-content;
   height: 100%;
-  text-overflow: ellipsis;
   white-space: nowrap;
-  display: flex;
-  align-items: center;
 }
 .footer {
   grid-area: footer;

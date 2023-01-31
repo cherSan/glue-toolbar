@@ -1,44 +1,43 @@
-<div class='process-close'>
-  <button nz-button [nzSize]='"small"' [nzType]="'default'" [routerLink]="[{outlets: { process: null }}]" [routerLinkActive]="'primary'" [relativeTo]="route.root">
-    <span nz-icon nzType="close" nzTheme="outline"></span>
-  </button>
-</div>
-<nz-tabset [nzTabPosition]="'left'">
-  <nz-tab [nzTitle]="'What New in Version 0.0.1?'">
-    <h3 nz-typography>Version 0.0.1 Changelog!</h3>
-  </nz-tab>
-  <nz-tab [nzTitle]="'Welcome!'">
-    <h3 nz-typography>Welcome to Millennium Toolbar!</h3>
-    <p nz-typography>
-      <b>Millennium Toolbar</b> is a desktop integration platform which brings order and efficiency to the business desktop.
-      It helps you declutter your workspace and make the most use of the precious desktop real estate when your
-      daily workflow requires you to use multiple applications.
-    </p>
-    <p nz-typography>
-      This guide will get you acquainted with all fundamental concepts implemented in <b>Millennium Toolbar</b>. This demo comes with built-in apps which
-      you can use to explore the different <b>Millennium Toolbar</b> functionalities.
-    </p>
-  </nz-tab>
-  <nz-tab [nzTitle]="'How to start?'">
+<ui-process
+  [title]="'Information'"
+>
+  <nz-tabset [nzTabPosition]="'left'">
+    <nz-tab [nzTitle]="'What New in Version 0.0.1?'">
+      <h3 nz-typography>Version 0.0.1 Changelog!</h3>
+    </nz-tab>
+    <nz-tab [nzTitle]="'Welcome!'">
+      <h3 nz-typography>Welcome to Millennium Toolbar!</h3>
+      <p nz-typography>
+        <b>Millennium Toolbar</b> is a desktop integration platform which brings order and efficiency to the business desktop.
+        It helps you declutter your workspace and make the most use of the precious desktop real estate when your
+        daily workflow requires you to use multiple applications.
+      </p>
+      <p nz-typography>
+        This guide will get you acquainted with all fundamental concepts implemented in <b>Millennium Toolbar</b>. This demo comes with built-in apps which
+        you can use to explore the different <b>Millennium Toolbar</b> functionalities.
+      </p>
+    </nz-tab>
+    <nz-tab [nzTitle]="'How to start?'">
 
-  </nz-tab>
-  <nz-tab [nzTitle]="'How to Work With Workspaces?'">
+    </nz-tab>
+    <nz-tab [nzTitle]="'How to Work With Workspaces?'">
 
-  </nz-tab>
-  <nz-tab [nzTitle]="'What Mean Tabs?'">
-    <h1>Tabs</h1>
-    <p>
-      When you set up the apps on your desktop the way you like them, or when you arrange a set of apps
-      needed for a specific task, save this Tab and later restore it when
-      you need to use it again. All your apps will be restored with the same position, size and state on the
-      desktop. What's more, mark a saved Layout as a default Global Layout and it will be restored
-      on startup of <b>Millennium Toolbar</b>.
-    </p>
-  </nz-tab>
-  <nz-tab [nzTitle]="'Additional Services!'">
+    </nz-tab>
+    <nz-tab [nzTitle]="'What Mean Tabs?'">
+      <h1>Tabs</h1>
+      <p>
+        When you set up the apps on your desktop the way you like them, or when you arrange a set of apps
+        needed for a specific task, save this Tab and later restore it when
+        you need to use it again. All your apps will be restored with the same position, size and state on the
+        desktop. What's more, mark a saved Layout as a default Global Layout and it will be restored
+        on startup of <b>Millennium Toolbar</b>.
+      </p>
+    </nz-tab>
+    <nz-tab [nzTitle]="'Additional Services!'">
 
-  </nz-tab>
-  <nz-tab [nzTitle]="'I found a Bug!'">
+    </nz-tab>
+    <nz-tab [nzTitle]="'I found a Bug!'">
 
-  </nz-tab>
-</nz-tabset>
+    </nz-tab>
+  </nz-tabset>
+</ui-process>

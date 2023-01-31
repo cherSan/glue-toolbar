@@ -3,12 +3,35 @@
     [title]="application?.title"
     [description]="application?.userProperties!['description']"
     [avatar]="{url: application?.icon}"
-    [back]="['..']"
+    [back]="['.']"
   >
     <nz-button-group extra [nzSize]="'small'">
-      <button nz-button [nzType]="'default'" [routerLink]="['report']" [routerLinkActive]="'primary'" [relativeTo]="route">
+      <button nz-button [nzType]="'default'" [routerLink]="['new-version']" [routerLinkActive]="'primary'" [relativeTo]="route">
+        <span nz-icon nzType="copy" nzTheme="outline"></span>
+      </button>
+      <button nz-button [nzType]="'default'" [routerLink]="['new-version']" [routerLinkActive]="'primary'" [relativeTo]="route">
+        <span nz-icon nzType="edit" nzTheme="outline"></span>
+      </button>
+      <button
+        nz-button
+        [nzType]="'default'"
+        [routerLink]="['report']"
+        [routerLinkActive]="'ant-btn-primary'"
+        [relativeTo]="route"
+      >
         <span nz-icon nzType="bug" nzTheme="outline"></span>
       </button>
     </nz-button-group>
+    <nz-descriptions [nzBordered]="true" [nzColumn]="1" [nzSize]="'small'">
+      <nz-descriptions-item [nzTitle]="'Version'">{{application?.version}}</nz-descriptions-item>
+      <nz-descriptions-item [nzTitle]="'Owner'">{{application?.userProperties!['owner']}}</nz-descriptions-item>
+      <nz-descriptions-item [nzTitle]="'Public at'">{{application?.userProperties!['activatedAt']}}</nz-descriptions-item>
+      <nz-descriptions-item [nzTitle]="'Category'">{{application?.userProperties!['category']}}</nz-descriptions-item>
+    </nz-descriptions>
   </ui-header>
+  <ui-navigation-item
+    [title]='"Access List"'
+    [avatar]='{icon: "user-switch"}'
+    [routerLink]='["access-list"]'
+  ></ui-navigation-item>
 </rubber-outlet>

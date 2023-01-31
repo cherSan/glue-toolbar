@@ -56,13 +56,6 @@ export class GlueService {
           }
         }),
         switchMap(() => {
-          if (!this.glue.userConfig?.gateway?.webPlatform) {
-            return from(this.interopsValue.register());
-          } else {
-            return of(undefined);
-          }
-        }),
-        switchMap(() => {
           this.myWindowValue = this.glue.windows.my();
           if (!this.glue.userConfig?.gateway?.webPlatform) {
             return from(this.myWindowValue.show())

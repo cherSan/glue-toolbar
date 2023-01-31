@@ -1,8 +1,9 @@
 import { Route } from '@angular/router';
 import {ApplicationsComponent} from "./applications/applications.component";
-import {CreateApplicationComponent} from "./create-application/create-application.component";
+import {ApplicationCreateComponent} from "./application-create/application-create.component";
 import {ApplicationDetailsComponent} from "./application-details/application-details.component";
 import {ApplicationReportComponent} from "./application-report/application-report.component";
+import {ApplicationsFilterComponent} from "./applications-filter/applications-filter.component";
 
 export const remoteRoutes: Route[] = [
   {
@@ -10,7 +11,7 @@ export const remoteRoutes: Route[] = [
     component: ApplicationsComponent,
     children: [
       {
-        path: ':applicationName',
+        path: 'details/:applicationName',
         component: ApplicationDetailsComponent,
         children: [
           {
@@ -20,9 +21,25 @@ export const remoteRoutes: Route[] = [
               width: 240
             }
           }
-        ]
+        ],
+        data: {
+          width: 400
+        }
+      },
+      {
+        path: 'filter',
+        component: ApplicationsFilterComponent,
+        data: {
+          width: 200
+        }
       }
     ]
-  },
-  { path: 'create-application', outlet: "process", component: CreateApplicationComponent },
+  }
+];
+
+export const createApplicationRoute: Route[] = [
+  {
+    path: '',
+    component: ApplicationCreateComponent
+  }
 ];

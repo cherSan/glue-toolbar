@@ -5,13 +5,31 @@
       [avatar]="{url: '/assets/m-logo.svg'}"
     >
       <nz-button-group extra [nzSize]="'small'">
-        <button nz-button [nzType]="'default'" [routerLink]="['notification']" [routerLinkActive]="'primary'" [relativeTo]="route">
+        <button
+          nz-button
+          [nzType]="'default'"
+          [routerLink]="['notification']"
+          [routerLinkActive]="'ant-btn-primary'"
+          [relativeTo]="route"
+        >
           <span nz-icon nzType="notification" nzTheme="outline"></span>
         </button>
-        <button nz-button [nzType]="'default'" [routerLink]="['settings']" [routerLinkActive]="'primary'" [relativeTo]="route">
+        <button
+          nz-button
+          [nzType]="'default'"
+          [routerLink]="['settings']"
+          [routerLinkActive]="'ant-btn-primary'"
+          [relativeTo]="route"
+        >
           <span nz-icon nzType="setting" nzTheme="outline"></span>
         </button>
-        <button nz-button [nzType]="'default'" [routerLink]="['exit']" [routerLinkActive]="'primary'" [relativeTo]="route">
+        <button
+          nz-button
+          [nzType]="'default'"
+          [routerLink]="['exit']"
+          [routerLinkActive]="'ant-btn-primary'"
+          [relativeTo]="route"
+        >
           <span nz-icon nzType="logout" nzTheme="outline"></span>
         </button>
       </nz-button-group>

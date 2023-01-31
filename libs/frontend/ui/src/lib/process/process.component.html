@@ -1,0 +1,14 @@
+<nz-page-header
+  [nzGhost]="false"
+  [nzTitle]="title"
+>
+  <nz-page-header-extra>
+    <ng-content select="page-extra"></ng-content>
+    <button nz-button [nzSize]='"small"' [nzType]="'default'" [routerLink]="[{outlets: { process: null }}]" [routerLinkActive]="'primary'" [relativeTo]="route.root">
+      <span nz-icon nzType="close" nzTheme="outline"></span>
+    </button>
+  </nz-page-header-extra>
+</nz-page-header>
+<nz-layout>
+  <ng-content></ng-content>
+</nz-layout>

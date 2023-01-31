@@ -3,7 +3,7 @@ import {NgIf} from "@angular/common";
 import {NzIconModule} from "ng-zorro-antd/icon";
 import {NzAvatarModule} from "ng-zorro-antd/avatar";
 import {NzTypographyModule} from "ng-zorro-antd/typography";
-import {RouterLink} from "@angular/router";
+import {ActivatedRoute, RouterLink} from "@angular/router";
 
 type Image = { url?: string | null }
 type Icon = { icon?: string | null }
@@ -28,5 +28,8 @@ export class HeaderComponent {
   @Input() public description?: string | null;
   @Input() public back?: any[] = undefined;
   @Input() public avatar?: Avatar;
+  @Input() public relativeTo: ActivatedRoute | null = this.router.parent;
   public hover = false;
+  constructor(private router: ActivatedRoute) {
+  }
 }

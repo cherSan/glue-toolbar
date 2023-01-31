@@ -2,17 +2,30 @@
   <ui-header
     [title]="'Applications'"
     [avatar]="{icon: 'appstore'}"
-    [back]="['..']"
+    [back]="['']"
   >
     <nz-segmented extra [nzOptions]="options"></nz-segmented>
     <nz-button-group extra [nzSize]="'small'">
-      <button nz-button [nzType]="'default'" [routerLink]="[{outlets: { process: 'create-application' }}]" [routerLinkActive]="'primary'" [relativeTo]="route">
+      <button
+        nz-button
+        [nzType]="'default'"
+        [routerLink]="[{outlets: { process: 'application-create' }}]"
+        [routerLinkActive]="'ant-btn-primary'"
+        [relativeTo]="route.root"
+      >
         <span nz-icon nzType="appstore-add" nzTheme="outline"></span>
       </button>
     </nz-button-group>
     <nz-input-group nzSearch [nzAddOnAfter]="filterCategoryTpl">
       <ng-template #filterCategoryTpl>
-        <button nz-button nzType="primary" nzSearch>
+        <button
+          nz-button
+          [nzSearch]="true"
+          [nzType]="'default'"
+          [routerLink]="['filter']"
+          [routerLinkActive]="'ant-btn-primary'"
+          [relativeTo]="route"
+        >
           <span nz-icon nzType="filter" nzTheme="outline"></span>
         </button>
       </ng-template>
@@ -24,7 +37,7 @@
       <ui-navigation-item
         [title]="application.title"
         [avatar]="{url: application.icon}"
-        [description]="application.userProperties['description']"
+        [description]="application.userProperties['category']"
         [active]="!!application.instances?.length"
         (click)="startApplication(application)"
       >
@@ -32,8 +45,8 @@
           <button
             nz-button
             [nzType]="'default'"
-            [routerLink]="[application.name]"
-            [routerLinkActive]="'primary'"
+            [routerLink]="['details', application.name]"
+            [routerLinkActive]="'ant-btn-primary'"
             [relativeTo]="route"
             (click)="$event.stopPropagation()"
           >

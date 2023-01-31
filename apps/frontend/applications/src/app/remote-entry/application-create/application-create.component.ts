@@ -1,20 +1,19 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
-import { NzTabsModule } from 'ng-zorro-antd/tabs';
-import { NzTypographyModule } from 'ng-zorro-antd/typography';
 import {NzButtonModule} from "ng-zorro-antd/button";
 import {NzIconModule} from "ng-zorro-antd/icon";
 import {ActivatedRoute, RouterLink, RouterLinkActive} from "@angular/router";
 import {ProcessComponent} from "@launchpad/frontend/ui";
+import {NzStepsModule} from "ng-zorro-antd/steps";
+import {NzLayoutModule} from "ng-zorro-antd/layout";
 
 @Component({
   standalone: true,
-  imports: [CommonModule, NzDescriptionsModule, NzTabsModule, NzTypographyModule, NzButtonModule, NzIconModule, RouterLink, RouterLinkActive, ProcessComponent],
-  templateUrl: './information.component.html',
-  styleUrls: ['./information.component.scss'],
+  imports: [CommonModule, NzButtonModule, NzIconModule, RouterLink, RouterLinkActive, ProcessComponent, NzStepsModule, NzLayoutModule],
+  templateUrl: './application-create.component.html',
+  styleUrls: ['./application-create.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class InformationComponent {
+export class ApplicationCreateComponent {
   constructor(public readonly route: ActivatedRoute) {}
 }

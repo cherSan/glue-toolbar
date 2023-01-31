@@ -1,7 +1,6 @@
 import { Route } from '@angular/router';
 import { loadRemoteModule } from '@nrwl/angular/mf';
 import {ToolbarComponent} from "./toolbar/toolbar.component";
-
 export const appRoutes: Route[] = [
   {
     path: 'applications',
@@ -52,6 +51,14 @@ export const appRoutes: Route[] = [
     loadChildren: () =>
       loadRemoteModule('frontend-information', './Routes').then(
         (m) => m.remoteRoutes
+      ),
+  },
+  {
+    path: 'application-create',
+    outlet: 'process',
+    loadChildren: () =>
+      loadRemoteModule('frontend-applications', './Routes').then(
+        (m) => m.createApplicationRoute
       ),
   }
 ];
