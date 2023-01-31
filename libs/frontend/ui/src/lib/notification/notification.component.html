@@ -1,0 +1,32 @@
+<div pSizeObserver class="notification" *ngFor="let notification of notifications">
+  <ng-container [ngSwitch]="notification.type">
+      <span
+        *ngSwitchCase="'success'"
+        nz-icon
+        nzType="check-circle"
+        class="notification-icon ant-notification-notice-icon-success"
+      ></span>
+    <span
+      *ngSwitchCase="'info'"
+      nz-icon
+      nzType="info-circle"
+      class="notification-icon ant-notification-notice-icon-info"
+    ></span>
+    <span
+      *ngSwitchCase="'warning'"
+      nz-icon
+      nzType="exclamation-circle"
+      class="notification-icon ant-notification-notice-icon-warning"
+    ></span>
+    <span
+      *ngSwitchCase="'error'"
+      nz-icon
+      nzType="close-circle"
+      class="notification-icon ant-notification-notice-icon-error"
+    ></span>
+  </ng-container>
+  <div class="title" [innerHTML]="notification.title"></div>
+  <div class="content">
+    <ng-container [ngTemplateOutlet]="notification.template"></ng-container>
+  </div>
+</div>

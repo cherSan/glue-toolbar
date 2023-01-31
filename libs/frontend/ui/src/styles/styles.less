@@ -1,5 +1,9 @@
-@import "node_modules/ng-zorro-antd/ng-zorro-antd.less";
-@import "node_modules/ng-zorro-antd/ng-zorro-antd.dark.less";
+@import "ng-zorro-antd/ng-zorro-antd.less";
+@import "ng-zorro-antd/ng-zorro-antd.dark.less";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 html, body {
   background: #1f1f1f;
@@ -23,4 +27,39 @@ html, body {
     border: 1px solid #303030;
   }
 }
+// card actions
+ul.ant-card-actions {
+  > li {
+    margin-top: 4px;
+    margin-bottom: 4px;
+  }
+}
+// card grid
+.ant-card-grid {
+  padding: 4px;
+}
+// description
+tr.ant-descriptions-row {
+  > td.ant-descriptions-item-label,
+  > td.ant-descriptions-item-content {
+    padding: 4px !important;
+    font-size: 12px;
+  }
+}
 
+nz-page-header.ant-page-header {
+  position: sticky;
+  top: 0;
+  padding: 0 10px;
+  align-items: center;
+  .ant-page-header-heading {
+    align-items: center;
+  }
+  .ant-page-header-heading-title {
+    font-size: 14px;
+  }
+}
+//notification
+.ant-notification-notice.ant-notification-notice-closable {
+  padding: 10px;
+}

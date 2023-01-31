@@ -8,7 +8,7 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { ApplicationRef, ENVIRONMENT_INITIALIZER } from '@angular/core';
 import { provideHttpClient } from '@angular/common/http';
 import {
-  ContainerComponent,
+  ContainerComponent, NotificationService,
   RubberOutletService,
 } from '@launchpad/frontend/ui';
 import {
@@ -27,6 +27,7 @@ export function bootstrap(appRoutes: Routes): Promise<ApplicationRef> {
       GlueService,
       VisibleAreasService,
       RubberOutletService,
+      NotificationService,
       {
         provide: ENVIRONMENT_INITIALIZER,
         useFactory: applicationEnvironmentInitialize,

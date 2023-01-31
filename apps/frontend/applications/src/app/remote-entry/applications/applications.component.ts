@@ -1,5 +1,5 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
-import {HeaderComponent, NavigationItemComponent, RubberOutlet} from "@launchpad/frontend/ui";
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, TemplateRef} from '@angular/core';
+import {HeaderComponent, NavigationItemComponent, NotificationService, RubberOutlet} from "@launchpad/frontend/ui";
 import {NzButtonModule} from "ng-zorro-antd/button";
 import {ActivatedRoute, RouterLink, RouterLinkActive} from "@angular/router";
 import {NzIconModule} from "ng-zorro-antd/icon";
@@ -44,11 +44,13 @@ export class ApplicationsComponent implements OnInit, OnDestroy {
       value: 'favorite',
     },
   ]
+  public readonly loading = new Set();
   private readonly live$ = new Subject<void>();
   constructor(
     public readonly route: ActivatedRoute,
     private readonly glue: GlueService,
-    private changeDetection: ChangeDetectorRef
+    private changeDetection: ChangeDetectorRef,
+    private notification: NotificationService
   ) {}
   ngOnInit() {
     this.glue.applications.applications$
@@ -64,7 +66,18 @@ export class ApplicationsComponent implements OnInit, OnDestroy {
     this.live$.next();
     this.live$.complete()
   }
-  startApplication(application: Glue42.AppManager.Application) {
-    return application.start();
+  start(application: Glue42.AppManager.Application, template: TemplateRef<any>) {
+    this.notification.addNotification({
+      type: 'info',
+      title: 'Application Will Start',
+      template
+    });
+    this.loading.add(application.name);
+    const timePromise = new Promise(res => setTimeout(res, 5000));
+    return Promise.race([application.start(), timePromise])
+      .finally(() => {
+        this.loading.delete(application.name);
+        this.changeDetection.detectChanges();
+      })
   }
 }

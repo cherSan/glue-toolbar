@@ -26,6 +26,12 @@
   cursor: pointer;
   transition: .5s;
 
+  &.danger {
+    &:after {
+      background-color: rgba(255, 77, 79, .1);
+    }
+  }
+
   &:after {
     @include position-absolute($top: 0, $right: 0);
     @include transition-mix($property: width);
@@ -92,6 +98,10 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+  }
+  span {
+    font-size: 11px;
+    line-height: 11px;
   }
 }
 .extra {

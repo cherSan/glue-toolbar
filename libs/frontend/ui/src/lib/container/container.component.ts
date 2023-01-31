@@ -19,12 +19,13 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { SizeObserverDirective } from '@launchpad/frontend/glue';
 import { RubberOutletService } from '../rubber-outlet/rubber-outlet.service';
+import {NotificationComponent} from "../notification/notification.component";
 @Component({
   standalone: true,
   selector: 'root',
   templateUrl: './container.component.html',
   styleUrls: ['./container.component.scss'],
-  imports: [SizeObserverDirective, RouterModule, NzIconModule, NzButtonModule],
+  imports: [SizeObserverDirective, RouterModule, NzIconModule, NzButtonModule, NotificationComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
     trigger('active', [

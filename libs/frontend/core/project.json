@@ -10,6 +10,22 @@
       "options": {
         "lintFilePatterns": ["libs/frontend/core/**/*.ts"]
       }
+    },
+    "build": {
+      "executor": "@nrwl/angular:ng-packagr-lite",
+      "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
+      "options": {
+        "project": "libs/frontend/core/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/frontend/core/tsconfig.lib.json"
+        },
+        "development": {
+          "tsConfig": "libs/frontend/core/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
     }
   },
   "tags": []

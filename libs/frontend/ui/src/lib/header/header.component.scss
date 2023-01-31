@@ -28,7 +28,12 @@
   h5 {
     margin: 0;
     padding: 0;
+    min-width: 1px;
     align-self: center;
+  }
+  span {
+    font-size: 11px;
+    line-height: 11px;
   }
 }
 .extra {

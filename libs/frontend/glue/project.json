@@ -14,6 +14,22 @@
           "libs/frontend/glue/**/*.html"
         ]
       }
+    },
+    "build": {
+      "executor": "@nrwl/angular:ng-packagr-lite",
+      "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
+      "options": {
+        "project": "libs/frontend/glue/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/frontend/glue/tsconfig.lib.json"
+        },
+        "development": {
+          "tsConfig": "libs/frontend/glue/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
     }
   },
   "tags": []

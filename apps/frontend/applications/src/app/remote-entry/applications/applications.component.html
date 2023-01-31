@@ -38,19 +38,21 @@
         [title]="application.title"
         [avatar]="{url: application.icon}"
         [description]="application.userProperties['category']"
-        [active]="!!application.instances?.length"
-        (click)="startApplication(application)"
+        [routerLink]="['details', application.name]"
+        [routerLinkActive]="'active'"
+        [relativeTo]="route"
       >
+        <ng-template #helloWorld><div>12321 3213213 213123213</div></ng-template>
         <nz-button-group [nzSize]="'small'">
           <button
             nz-button
             [nzType]="'default'"
-            [routerLink]="['details', application.name]"
-            [routerLinkActive]="'ant-btn-primary'"
-            [relativeTo]="route"
-            (click)="$event.stopPropagation()"
+            [nzLoading]="loading.has(application.name)"
+            (click)="start(application, helloWorld)"
+            [class.ant-btn-primary]="application.instances.length"
+            [disabled]="!!application.instances.length && !application.allowMultiple"
           >
-            <span nz-icon nzType="info" nzTheme="outline"></span>
+            <span nz-icon nzType="caret-right" nzTheme="outline"></span>
           </button>
         </nz-button-group>
       </ui-navigation-item>

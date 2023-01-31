@@ -17,7 +17,7 @@ export class SizeObserverDirective implements OnInit, OnDestroy {
         height: parseInt(`${rect.height}`)
       })
     }
-  })
+  });
   constructor(
     private readonly el: ElementRef,
     private readonly visibleAreas: VisibleAreasService

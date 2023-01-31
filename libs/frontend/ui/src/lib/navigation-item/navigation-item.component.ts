@@ -19,5 +19,6 @@ export class NavigationItemComponent {
   @Input() public title: string = '';
   @Input() public description: string = '';
   @Input() public avatar!: Avatar;
+  @HostBinding('class.danger') @Input() public danger = false;
   @HostBinding('class.active') @Input() public active: boolean = false;
 }

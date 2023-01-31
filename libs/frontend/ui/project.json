@@ -4,22 +4,6 @@
   "projectType": "library",
   "sourceRoot": "libs/frontend/ui/src",
   "prefix": "ui",
-  "build": {
-    "options": {
-      "assets": [
-        {
-          "input": "libs/frontend/ui/src/styles",
-          "glob": "**/*",
-          "output": "styles"
-        },
-        {
-          "input": "libs/frontend/ui/src/assets",
-          "glob": "**/*",
-          "output": "assets"
-        }
-      ]
-    }
-  },
   "targets": {
     "lint": {
       "executor": "@nrwl/linter:eslint",
@@ -30,6 +14,23 @@
           "libs/frontend/ui/**/*.html"
         ]
       }
+    },
+    "build": {
+      "executor": "@nrwl/angular:ng-packagr-lite",
+      "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
+      "options": {
+        "project": "libs/frontend/ui/ng-package.json",
+        "tailwindConfig": "libs/frontend/ui/tailwind.config.js"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/frontend/ui/tsconfig.lib.json"
+        },
+        "development": {
+          "tsConfig": "libs/frontend/ui/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
     }
   },
   "tags": []

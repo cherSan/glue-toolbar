@@ -13,14 +13,13 @@
           <span nz-icon nzType="info" nzTheme="outline"></span>
         </button>
       </nz-button-group>
+      <nz-descriptions [nzBordered]="true" [nzColumn]="1" [nzSize]="'small'">
+        <nz-descriptions-item [nzTitle]="'User'">{{user}}</nz-descriptions-item>
+        <nz-descriptions-item [nzTitle]="'Region'">{{region}}</nz-descriptions-item>
+        <nz-descriptions-item [nzTitle]="'Environment'">{{env}}</nz-descriptions-item>
+        <nz-descriptions-item [nzTitle]="'Version'">{{version}}</nz-descriptions-item>
+      </nz-descriptions>
     </ui-header>
-    <nz-descriptions [nzBordered]="true" [nzColumn]="1" [nzSize]="'small'">
-      <nz-descriptions-item [nzTitle]="'User'">{{user}}</nz-descriptions-item>
-      <nz-descriptions-item [nzTitle]="'Region'">{{region}}</nz-descriptions-item>
-      <nz-descriptions-item [nzTitle]="'Environment'">{{env}}</nz-descriptions-item>
-      <nz-descriptions-item [nzTitle]="'Version'">{{version}}</nz-descriptions-item>
-    </nz-descriptions>
-
     <form nz-form [formGroup]="form" (ngSubmit)="submitForm()">
       <nz-form-item>
         <nz-form-label [nzSpan]="18">Show Guide on Start</nz-form-label>
