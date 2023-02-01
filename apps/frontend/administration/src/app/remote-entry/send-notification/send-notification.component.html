@@ -10,14 +10,17 @@
       </button>
     </nz-button-group>
     <nz-mention
+      [pSdkObserver]="'ant-mentions-dropdown'"
       [nzSuggestions]="applications"
       [nzValueWith]="valueWith"
       (nzOnSelect)="onSelect($event)"
     >
       <textarea #input rows="5" nz-input nzMentionTrigger></textarea>
       <ng-container *nzMentionSuggestion="let application">
-        <nz-avatar nzSize="small" [nzSrc]="application.icon"></nz-avatar>
-        <span>{{ application.title }} - {{ application.version }}</span>
+        <div>
+          <nz-avatar nzSize="small" [nzSrc]="application.icon"></nz-avatar>
+          <span>{{ application.title }} - {{ application.version }}</span>
+        </div>
       </ng-container>
     </nz-mention>
   </ui-header>

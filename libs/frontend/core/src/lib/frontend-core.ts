@@ -5,7 +5,7 @@ import {
   withEnabledBlockingInitialNavigation,
 } from '@angular/router';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { ApplicationRef, ENVIRONMENT_INITIALIZER } from '@angular/core';
+import {ApplicationRef, ENVIRONMENT_INITIALIZER} from '@angular/core';
 import { provideHttpClient } from '@angular/common/http';
 import {
   ContainerComponent, NotificationService,
@@ -38,7 +38,7 @@ export function bootstrap(appRoutes: Routes): Promise<ApplicationRef> {
         provide: Window,
         useValue: window,
         multi: true,
-      },
+      }
     ],
   });
 }

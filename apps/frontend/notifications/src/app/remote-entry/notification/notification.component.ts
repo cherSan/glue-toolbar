@@ -22,10 +22,15 @@ export class NotificationComponent {
     this.notificationValue = {
       ...notification,
     }
-    const value = notification.message.split(/(\@application\:\"[^".]+\")/g);
+    const value = notification.message.split(/(@application:"[^"]+")/g);
     this.notificationMessage = value.map(str => {
       if (str.startsWith('@application:')) {
-        const applicationName = str.replace(/\@application\:\"(.+)\"/, '$1');
+        const application = str.replace(/@application:"([^"]+)"/, '$1');
+        const [
+          applicationName,
+          applicationTitle,
+          applicationOwner
+        ] = application.split(':');
         const myApplication = notification.data['@applications'].find(app => app.name === applicationName);
         if (myApplication) {
           return {
@@ -36,8 +41,8 @@ export class NotificationComponent {
           return {
             type: 'no-application',
             data: {
-              title: applicationName,
-              owner: 'a.chernushevich@mlp.com'
+              title: applicationTitle,
+              owner: applicationOwner
             }
           }
         }

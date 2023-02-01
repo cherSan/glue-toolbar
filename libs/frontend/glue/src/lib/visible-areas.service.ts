@@ -3,7 +3,7 @@ import { BehaviorSubject, switchMap } from 'rxjs';
 import {Glue42Store} from "@glue42/ng";
 import {Glue42} from "@glue42/desktop";
 
-type AreaParams = {
+export type AreaParams = {
   left: number;
   top: number;
   width: number;
@@ -40,8 +40,18 @@ export class VisibleAreasService {
     this.areas.set(key, areaParams);
     this.visibleAreas$.next([...this.areas.values()]);
   }
+  setMultiplyParams(areas: [string, AreaParams][]) {
+    areas.forEach(area => this.areas.set(area[0], area[1]));
+    this.visibleAreas$.next([...this.areas.values()]);
+  }
   removeParams(key: string) {
     this.areas.delete(key);
+    this.visibleAreas$.next([...this.areas.values()]);
+  }
+  removeMultiplyParams(keys: string[]) {
+    keys.forEach((key) => {
+      this.areas.delete(key);
+    })
     this.visibleAreas$.next([...this.areas.values()]);
   }
 }
