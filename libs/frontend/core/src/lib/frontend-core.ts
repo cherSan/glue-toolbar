@@ -5,20 +5,29 @@ import {
   withEnabledBlockingInitialNavigation,
 } from '@angular/router';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import {ApplicationRef, ENVIRONMENT_INITIALIZER} from '@angular/core';
+import {ApplicationRef, ENVIRONMENT_INITIALIZER, Type} from '@angular/core';
 import { provideHttpClient } from '@angular/common/http';
 import {
   ContainerComponent, NotificationService,
   RubberOutletService,
 } from '@launchpad/frontend/ui';
 import {
+  APPLICATION_INTEROPS,
+  ApplicationInterop,
   getGlueProviders,
   GlueService,
   VisibleAreasService,
 } from '@launchpad/frontend/glue';
 import { applicationEnvironmentInitialize } from './application-environment-initialize';
-export function bootstrap(appRoutes: Routes, component: any = ContainerComponent): Promise<ApplicationRef> {
-  return bootstrapApplication(component, {
+type BootstrapOptions = {
+  interops?: ApplicationInterop[],
+  component?: Type<unknown>,
+}
+export function bootstrap(
+  appRoutes: Routes,
+  options: BootstrapOptions = {}
+): Promise<ApplicationRef> {
+  return bootstrapApplication(options.component || ContainerComponent, {
     providers: [
       provideRouter(appRoutes, withEnabledBlockingInitialNavigation()),
       provideAnimations(),
@@ -32,7 +41,13 @@ export function bootstrap(appRoutes: Routes, component: any = ContainerComponent
         provide: ENVIRONMENT_INITIALIZER,
         useFactory: applicationEnvironmentInitialize,
         multi: true,
-        deps: [GlueService],
+        deps: [GlueService, APPLICATION_INTEROPS],
+      },
+      {
+        provide: APPLICATION_INTEROPS,
+        useValue: options.interops || [],
+        multi: false,
+        deps: [],
       },
       {
         provide: Window,

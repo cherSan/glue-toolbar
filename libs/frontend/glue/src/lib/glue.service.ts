@@ -1,4 +1,4 @@
-import {Injectable} from "@angular/core";
+import {Inject, Injectable} from "@angular/core";
 import {Glue42} from "@glue42/desktop";
 import {Glue42Store} from "@glue42/ng";
 import {catchError, first, firstValueFrom, forkJoin, from, Observable, of, switchMap, tap} from "rxjs";
@@ -6,6 +6,8 @@ import {GlueLayouts} from "./glue-layouts";
 import {GlueApplications} from "./glue-applications";
 import {GlueInterops} from "./glue-interops";
 import {GlueStreams} from "./glue.streams";
+import {APPLICATION_INTEROPS} from "./glue-interops.injector";
+import {ApplicationInterop} from "./interops/interop";
 
 @Injectable({
   providedIn: "root"
@@ -29,6 +31,7 @@ export class GlueService {
   constructor(
     private window: Window,
     private glueStore: Glue42Store,
+    @Inject(APPLICATION_INTEROPS) private readonly applicationInterops: ApplicationInterop[]
   ) {
   }
   initialize(): Observable<Glue42.Windows.GDWindow> {
@@ -55,7 +58,12 @@ export class GlueService {
           if (!this.glue.userConfig?.gateway?.webPlatform) {
             this.tabsValue = new GlueLayouts(this.glue);
             this.applicationsValue = new GlueApplications(this.glue);
-            this.interopsValue = new GlueInterops(this.glue);
+            const interops = this.applicationInterops.reduce((acc,interop) => {
+              const appInterop = new interop(this.glue);
+              acc[appInterop.name] = appInterop.call;
+              return acc;
+            }, {})
+            this.interopsValue = new GlueInterops(this.glue, interops);
             this.streamsValue = new GlueStreams(this.glue);
           }
         }),

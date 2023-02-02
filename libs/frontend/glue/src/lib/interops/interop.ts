@@ -1,11 +1,15 @@
 import {Glue42} from "@glue42/desktop";
 import {first, from, Observable, switchMap} from "rxjs";
+// @TODO: REFACTOR
+export type ApplicationInterop = any;
 export abstract class Interop<T, R> {
   private methodIsReady: boolean = false;
+  public readonly name!: string;
   protected constructor(
     protected readonly glue: Glue42.Glue,
-    protected readonly name: string | Glue42.Interop.MethodDefinition
+    name: string
   ) {
+    this.name = name;
     this.glue.interop.waitForMethod(this.name.toString())
       .then(() => this.methodIsReady = true)
       .catch(() => this.methodIsReady = false);

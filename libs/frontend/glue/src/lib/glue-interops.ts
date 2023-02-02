@@ -7,5 +7,8 @@ export class GlueInterops {
   private readonly interopInformation = new InteropInformation(this.glue);
   public readonly exit = this.interopExit.call;
   public readonly information = this.interopInformation.call;
-  constructor(private glue: Glue42.Glue) {}
+  constructor(
+    private glue: Glue42.Glue,
+    public readonly application: Record<string, (any: any) => any>
+  ) {}
 }

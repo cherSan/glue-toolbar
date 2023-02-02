@@ -4,3 +4,6 @@ export * from './lib/glue-initialize.guard';
 export * from './lib/size-observer.directive';
 export * from './lib/sdk-observer.directive';
 export * from './lib/visible-areas.service';
+export * from './lib/glue-interops.injector';
+export * from './lib/interops/interop';
+export * from './lib/interops/exit';

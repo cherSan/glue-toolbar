@@ -62,4 +62,9 @@ export class ToolbarComponent {
       .pipe(first())
       .subscribe();
   }
+  logout() {
+    this.glueService.interops.application['LAUNCHPAD_INTEROP_METHOD_exit']({})
+      .pipe(first())
+      .subscribe();
+  }
 }
