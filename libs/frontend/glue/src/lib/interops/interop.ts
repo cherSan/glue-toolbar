@@ -1,5 +1,5 @@
 import {Glue42} from "@glue42/desktop";
-import {from, Observable, switchMap} from "rxjs";
+import {first, from, Observable, switchMap} from "rxjs";
 export abstract class Interop<T, R> {
   private methodIsReady: boolean = false;
   protected constructor(
@@ -25,6 +25,7 @@ export abstract class Interop<T, R> {
     if (!this.methodIsReady) {
       return from(this.glue.interop.registerAsync(this.name, this.handler))
         .pipe(
+          first(),
           switchMap(() => this.callFunction(
             args,
             'best',
@@ -42,6 +43,6 @@ export abstract class Interop<T, R> {
         waitTimeoutMs: 1000*20,
         methodResponseTimeoutMs: 1000*20
       }
-    );
+    ).pipe(first());
   }
 }

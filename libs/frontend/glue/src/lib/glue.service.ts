@@ -5,6 +5,7 @@ import {catchError, first, firstValueFrom, forkJoin, from, Observable, of, switc
 import {GlueLayouts} from "./glue-layouts";
 import {GlueApplications} from "./glue-applications";
 import {GlueInterops} from "./glue-interops";
+import {GlueStreams} from "./glue.streams";
 
 @Injectable({
   providedIn: "root"
@@ -20,6 +21,8 @@ export class GlueService {
   get applications(): GlueApplications { return this.applicationsValue }
   private interopsValue!: GlueInterops;
   get interops(): GlueInterops { return this.interopsValue };
+  private streamsValue!: GlueStreams;
+  get streams(): GlueStreams { return this.streamsValue };
   public user?: string;
   public region?: string;
   public env?: string;
@@ -48,11 +51,12 @@ export class GlueService {
         tap(() => {
           this.user = window.glue42gd?.env.windowsUserName;
           this.env = window.glue42gd?.env.env;
-          this.region = window.glue42gd?.env.region
+          this.region = window.glue42gd?.env.region;
           if (!this.glue.userConfig?.gateway?.webPlatform) {
             this.tabsValue = new GlueLayouts(this.glue);
             this.applicationsValue = new GlueApplications(this.glue);
             this.interopsValue = new GlueInterops(this.glue);
+            this.streamsValue = new GlueStreams(this.glue);
           }
         }),
         switchMap(() => {

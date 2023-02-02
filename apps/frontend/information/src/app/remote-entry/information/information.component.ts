@@ -7,7 +7,6 @@ import {NzButtonModule} from "ng-zorro-antd/button";
 import {NzIconModule} from "ng-zorro-antd/icon";
 import {ActivatedRoute, RouterLink, RouterLinkActive} from "@angular/router";
 import {ProcessComponent} from "@launchpad/frontend/ui";
-
 @Component({
   standalone: true,
   imports: [CommonModule, NzDescriptionsModule, NzTabsModule, NzTypographyModule, NzButtonModule, NzIconModule, RouterLink, RouterLinkActive, ProcessComponent],

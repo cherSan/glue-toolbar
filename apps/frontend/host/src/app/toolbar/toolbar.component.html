@@ -8,7 +8,11 @@
         <button nz-button [nzType]="'default'" (click)='feedback()'>
           <span nz-icon nzType="bug" nzTheme="outline"></span>
         </button>
-        <button nz-button [nzType]="'default'" [routerLink]="[{outlets: {process: 'information'}}]" [routerLinkActive]="'primary'" [relativeTo]="route.root">
+        <button
+          nz-button
+          [nzType]="!!informationWindow ? 'primary' : 'default'"
+          (click)="information()"
+        >
           <span nz-icon nzType="info" nzTheme="outline"></span>
         </button>
         <button

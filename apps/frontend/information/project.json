@@ -17,9 +17,17 @@
         "inlineStyleLanguage": "scss",
         "assets": [
           "apps/frontend/information/src/favicon.ico",
-          "apps/frontend/information/src/assets"
+          "apps/frontend/information/src/assets",
+          {
+            "glob": "**/*",
+            "input": "node_modules/@ant-design/icons-angular/src/inline-svg/",
+            "output": "/assets/"
+          }
         ],
-        "styles": ["apps/frontend/information/src/styles.scss"],
+        "styles": [
+          "libs/frontend/ui/src/styles/styles.less",
+          "apps/frontend/information/src/styles.scss"
+        ],
         "scripts": [],
         "customWebpackConfig": {
           "path": "apps/frontend/information/webpack.config.js"

@@ -17,8 +17,8 @@ import {
   VisibleAreasService,
 } from '@launchpad/frontend/glue';
 import { applicationEnvironmentInitialize } from './application-environment-initialize';
-export function bootstrap(appRoutes: Routes): Promise<ApplicationRef> {
-  return bootstrapApplication(ContainerComponent, {
+export function bootstrap(appRoutes: Routes, component: any = ContainerComponent): Promise<ApplicationRef> {
+  return bootstrapApplication(component, {
     providers: [
       provideRouter(appRoutes, withEnabledBlockingInitialNavigation()),
       provideAnimations(),
