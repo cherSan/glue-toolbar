@@ -17,6 +17,16 @@
     "paths": {
       "@launchpad/frontend/core": ["libs/frontend/core/src/index.ts"],
       "@launchpad/frontend/glue": ["libs/frontend/glue/src/index.ts"],
+      "@launchpad/frontend/glue/applications": [
+        "libs/frontend/glue/applications/src/index.ts"
+      ],
+      "@launchpad/frontend/glue/interops": [
+        "libs/frontend/glue/interops/src/index.ts"
+      ],
+      "@launchpad/frontend/glue/windows": [
+        "libs/frontend/glue/windows/src/index.ts"
+      ],
+      "@launchpad/frontend/interops": ["libs/frontend/interops/src/index.ts"],
       "@launchpad/frontend/ui": ["libs/frontend/ui/src/index.ts"]
     }
   },

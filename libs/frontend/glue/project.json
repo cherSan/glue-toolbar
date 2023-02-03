@@ -11,7 +11,13 @@
       "options": {
         "lintFilePatterns": [
           "libs/frontend/glue/**/*.ts",
-          "libs/frontend/glue/**/*.html"
+          "libs/frontend/glue/**/*.html",
+          "libs/frontend/glue/windows/**/*.ts",
+          "libs/frontend/glue/windows/**/*.html",
+          "libs/frontend/glue/interops/**/*.ts",
+          "libs/frontend/glue/interops/**/*.html",
+          "libs/frontend/glue/applications/**/*.ts",
+          "libs/frontend/glue/applications/**/*.html"
         ]
       }
     },

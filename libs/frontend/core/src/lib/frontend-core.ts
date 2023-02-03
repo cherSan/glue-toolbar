@@ -5,35 +5,44 @@ import {
   withEnabledBlockingInitialNavigation,
 } from '@angular/router';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import {ApplicationRef, ENVIRONMENT_INITIALIZER, Type} from '@angular/core';
+import {ApplicationRef, ENVIRONMENT_INITIALIZER} from '@angular/core';
 import { provideHttpClient } from '@angular/common/http';
 import {
-  ContainerComponent, NotificationService,
+  ContainerComponent,
+  NotificationService,
   RubberOutletService,
 } from '@launchpad/frontend/ui';
 import {
-  APPLICATION_INTEROPS,
-  ApplicationInterop,
   getGlueProviders,
   GlueService,
   VisibleAreasService,
 } from '@launchpad/frontend/glue';
+import {Interops, Streams} from "@launchpad/frontend/glue/interops";
+import {Applications, applicationsStream} from "@launchpad/frontend/glue/applications";
+import {Windows, windowCloseInterop, windowOpenInterop, windowsStream} from "@launchpad/frontend/glue/windows";
 import { applicationEnvironmentInitialize } from './application-environment-initialize';
-type BootstrapOptions = {
-  interops?: ApplicationInterop[],
-  component?: Type<unknown>,
-}
+import {BootstrapOptions} from "./types";
+
 export function bootstrap(
   appRoutes: Routes,
   options: BootstrapOptions = {}
 ): Promise<ApplicationRef> {
   return bootstrapApplication(options.component || ContainerComponent, {
     providers: [
+      ...(options.providers || []),
+      windowsStream,
+      applicationsStream,
+      windowCloseInterop,
+      windowOpenInterop,
       provideRouter(appRoutes, withEnabledBlockingInitialNavigation()),
       provideAnimations(),
       provideHttpClient(),
       getGlueProviders(),
       GlueService,
+      Streams,
+      Interops,
+      Windows,
+      Applications,
       VisibleAreasService,
       RubberOutletService,
       NotificationService,
@@ -41,13 +50,7 @@ export function bootstrap(
         provide: ENVIRONMENT_INITIALIZER,
         useFactory: applicationEnvironmentInitialize,
         multi: true,
-        deps: [GlueService, APPLICATION_INTEROPS],
-      },
-      {
-        provide: APPLICATION_INTEROPS,
-        useValue: options.interops || [],
-        multi: false,
-        deps: [],
+        deps: [GlueService, Streams, Interops, Windows],
       },
       {
         provide: Window,

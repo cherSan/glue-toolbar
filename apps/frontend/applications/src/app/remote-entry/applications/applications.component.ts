@@ -55,7 +55,7 @@ export class ApplicationsComponent implements OnInit, OnDestroy {
       .pipe(
         takeUntil(this.live$),
         tap((applications) => {
-          this.applications = applications || [];
+          this.applications = applications as Glue42.AppManager.Application[];
           this.changeDetection.detectChanges();
         })
       ).subscribe()

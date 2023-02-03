@@ -1,14 +1,11 @@
-import {Inject, Injectable} from "@angular/core";
+import {Injectable} from "@angular/core";
 import {Glue42} from "@glue42/desktop";
 import {Glue42Store} from "@glue42/ng";
 import {catchError, first, firstValueFrom, forkJoin, from, Observable, of, switchMap, tap} from "rxjs";
+import {Interops, Streams} from "@launchpad/frontend/glue/interops";
+import {Windows} from "@launchpad/frontend/glue/windows";
+import {Applications} from "@launchpad/frontend/glue/applications";
 import {GlueLayouts} from "./glue-layouts";
-import {GlueApplications} from "./glue-applications";
-import {GlueInterops} from "./glue-interops";
-import {GlueStreams} from "./glue.streams";
-import {APPLICATION_INTEROPS} from "./glue-interops.injector";
-import {ApplicationInterop} from "./interops/interop";
-
 @Injectable({
   providedIn: "root"
 })
@@ -19,23 +16,19 @@ export class GlueService {
   get myWindow(): Glue42.Windows.GDWindow { return this.myWindowValue }
   private tabsValue!: GlueLayouts;
   get tabs(): GlueLayouts { return this.tabsValue }
-  private applicationsValue!: GlueApplications
-  get applications(): GlueApplications { return this.applicationsValue }
-  private interopsValue!: GlueInterops;
-  get interops(): GlueInterops { return this.interopsValue };
-  private streamsValue!: GlueStreams;
-  get streams(): GlueStreams { return this.streamsValue };
   public user?: string;
   public region?: string;
   public env?: string;
   constructor(
-    private window: Window,
-    private glueStore: Glue42Store,
-    @Inject(APPLICATION_INTEROPS) private readonly applicationInterops: ApplicationInterop[]
+    private readonly window: Window,
+    private readonly glueStore: Glue42Store,
+    public readonly streams: Streams,
+    public readonly interops: Interops,
+    public readonly windows: Windows,
+    public readonly applications: Applications
   ) {
   }
   initialize(): Observable<Glue42.Windows.GDWindow> {
-
     if (!this.glue) {
       return this.glueStore.ready().pipe(
         first(),
@@ -51,20 +44,22 @@ export class GlueService {
           if (this.glue.layouts?.ready) services.push(this.glue.layouts.ready());
           return services.length ? forkJoin(services) : of(true);
         }),
+        switchMap(() => {
+          return Promise.all([
+            firstValueFrom(this.streams.initialize()),
+            firstValueFrom(this.interops.initialize())
+          ])
+        }),
+        tap(() => {
+          this.windows.initialize().subscribe();
+          this.applications.initialize().subscribe();
+        }),
         tap(() => {
           this.user = window.glue42gd?.env.windowsUserName;
           this.env = window.glue42gd?.env.env;
           this.region = window.glue42gd?.env.region;
           if (!this.glue.userConfig?.gateway?.webPlatform) {
             this.tabsValue = new GlueLayouts(this.glue);
-            this.applicationsValue = new GlueApplications(this.glue);
-            const interops = this.applicationInterops.reduce((acc,interop) => {
-              const appInterop = new interop(this.glue);
-              acc[appInterop.name] = appInterop.call;
-              return acc;
-            }, {})
-            this.interopsValue = new GlueInterops(this.glue, interops);
-            this.streamsValue = new GlueStreams(this.glue);
           }
         }),
         switchMap(() => {
@@ -87,6 +82,5 @@ export class GlueService {
         }
       )
       .then(() => this.myWindow.close())
-
   }
 }

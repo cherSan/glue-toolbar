@@ -1,6 +1,5 @@
 import {Directive, ElementRef, OnDestroy, OnInit} from '@angular/core';
 import {VisibleAreasService} from "./visible-areas.service";
-
 @Directive({
   standalone: true,
   selector: '[pSizeObserver]',

@@ -5,8 +5,9 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import {GlueService} from "@launchpad/frontend/glue";
-import {first, map, Subject, takeUntil, tap} from "rxjs";
+import {Subject, takeUntil, tap} from "rxjs";
 import {Glue42} from "@glue42/desktop";
+import {Windows} from "@launchpad/frontend/glue/windows";
 @Component({
   standalone: true,
   imports: [
@@ -28,27 +29,18 @@ export class ToolbarComponent {
   public informationWindow?: Glue42.Windows.GDWindow;
   constructor(
     public readonly route: ActivatedRoute,
+    private readonly windows: Windows,
     private readonly glueService: GlueService,
-    private readonly changeDetect: ChangeDetectorRef
+    private readonly change: ChangeDetectorRef
   ) {}
   ngOnInit() {
-    this.glueService.streams.windows.stream$
-      .pipe(
-        takeUntil(this.live$),
-        map(data => data.find(w => w.name === 'information-window')),
-        map((wnd) => {
-          if (wnd?.name) {
-            return this.glueService.glue.windows.find(wnd?.name)
-          } else {
-            return undefined;
-          }
-        }),
-        tap((window) => {
-          this.informationWindow = window;
-          this.changeDetect.detectChanges();
-        })
-      )
-      .subscribe()
+    this.windows.window$('information').pipe(
+      takeUntil(this.live$),
+      tap(w => {
+        this.informationWindow = w;
+        this.change.detectChanges();
+      })
+    ).subscribe()
   }
   ngOnDestroy() {
     this.live$.next();
@@ -57,14 +49,27 @@ export class ToolbarComponent {
   feedback() {
     this.glueService.glue.feedback({ message: 'Feedback from settings' });
   }
+  process = false;
   information() {
-    this.glueService.interops.information()
-      .pipe(first())
-      .subscribe();
-  }
-  logout() {
-    this.glueService.interops.application['LAUNCHPAD_INTEROP_METHOD_exit']({})
-      .pipe(first())
-      .subscribe();
+    this.process = true;
+    if (this.windows.getWindowByName('information')) {
+      this.windows.closeWindow('information')
+        .pipe(tap(() => {
+          this.process = false;
+          this.change.detectChanges();
+        }))
+        .subscribe();
+    } else {
+      this.windows.openWindow('information', 'http://localhost:4210', {
+        width: 100,
+        height: 100,
+        onTop: false
+      })
+        .pipe(tap(() => {
+          this.process = false;
+          this.change.detectChanges();
+        }))
+        .subscribe();
+    }
   }
 }

@@ -49,10 +49,10 @@ export class ApplicationDetailsComponent implements OnInit {
     this.route.params.pipe(
       takeUntil(this.live$),
       switchMap(({applicationName}) => this.glue.applications.applications$.pipe(
-        map((applications) => applications.find(app => app.name === applicationName))
+        map((applications) => (applications as Glue42.AppManager.Application[]).find(app => app.name === applicationName))
       )),
       tap((application) => {
-        this.application = application;
+        this.application = application as Glue42.AppManager.Application;
         this.changeDetection.detectChanges();
       })
     ).subscribe()
