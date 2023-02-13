@@ -20,6 +20,7 @@ import {
 import {Interops, Streams} from "@launchpad/frontend/glue/interops";
 import {Applications, applicationsStream} from "@launchpad/frontend/glue/applications";
 import {Windows, windowCloseInterop, windowOpenInterop, windowsStream} from "@launchpad/frontend/glue/windows";
+import {currentLayoutStream, layoutsStream} from "@launchpad/frontend/glue/tabs";
 import { applicationEnvironmentInitialize } from './application-environment-initialize';
 import {BootstrapOptions} from "./types";
 
@@ -32,6 +33,8 @@ export function bootstrap(
       ...(options.providers || []),
       windowsStream,
       applicationsStream,
+      layoutsStream,
+      currentLayoutStream,
       windowCloseInterop,
       windowOpenInterop,
       provideRouter(appRoutes, withEnabledBlockingInitialNavigation()),
@@ -55,7 +58,7 @@ export function bootstrap(
       {
         provide: Window,
         useValue: window,
-        multi: true,
+        multi: false
       }
     ],
   });

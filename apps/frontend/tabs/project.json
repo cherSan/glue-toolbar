@@ -1,0 +1,117 @@
+{
+  "name": "frontend-tabs",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/frontend/tabs/src",
+  "prefix": "tabs",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/angular:webpack-browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/frontend/tabs",
+        "index": "apps/frontend/tabs/src/index.html",
+        "main": "apps/frontend/tabs/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/frontend/tabs/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          "apps/frontend/tabs/src/favicon.ico",
+          "apps/frontend/tabs/src/assets",
+          {
+            "glob": "**/*",
+            "input": "node_modules/@ant-design/icons-angular/src/inline-svg/",
+            "output": "/assets/"
+          }
+        ],
+        "styles": [
+          "node_modules/ng-zorro-antd/ng-zorro-antd.css",
+          "node_modules/ng-zorro-antd/ng-zorro-antd.dark.css",
+          "apps/frontend/tabs/src/styles.scss"
+        ],
+        "scripts": [],
+        "customWebpackConfig": {
+          "path": "apps/frontend/tabs/webpack.config.js"
+        }
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all",
+          "customWebpackConfig": {
+            "path": "apps/frontend/tabs/webpack.prod.config.js"
+          }
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@nrwl/angular:webpack-dev-server",
+      "configurations": {
+        "production": {
+          "browserTarget": "frontend-tabs:build:production"
+        },
+        "development": {
+          "browserTarget": "frontend-tabs:build:development"
+        }
+      },
+      "defaultConfiguration": "development",
+      "options": {
+        "port": 4203,
+        "publicHost": "http://localhost:4203"
+      }
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "frontend-tabs:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "apps/frontend/tabs/**/*.ts",
+          "apps/frontend/tabs/**/*.html"
+        ]
+      }
+    },
+    "serve-static": {
+      "executor": "@nrwl/angular:file-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "frontend-tabs:build",
+        "port": 4203
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "frontend-tabs:build:development"
+        },
+        "production": {
+          "buildTarget": "frontend-tabs:build:production"
+        }
+      }
+    }
+  },
+  "tags": []
+}

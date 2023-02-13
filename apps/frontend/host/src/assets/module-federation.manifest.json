@@ -1,6 +1,7 @@
 {
   "frontend-applications": "http://localhost:4201",
   "frontend-workspaces": "http://localhost:4202",
+  "frontend-tabs": "http://localhost:4203",
   "frontend-administration": "http://localhost:4205",
   "frontend-information": "http://localhost:4210",
   "frontend-notifications": "http://localhost:4211"

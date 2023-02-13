@@ -25,6 +25,16 @@ export const appRoutes: Route[] = [
     }
   },
   {
+    path: 'tabs',
+    loadChildren: () =>
+      loadRemoteModule('frontend-tabs', './Routes').then(
+        (m) => m.remoteRoutes
+      ),
+    data: {
+      weight: 0
+    }
+  },
+  {
     path: 'workspaces',
     loadChildren: () =>
       loadRemoteModule('frontend-workspaces', './Routes').then(

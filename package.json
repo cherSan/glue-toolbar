@@ -2,7 +2,15 @@
   "name": "launchpad",
   "version": "0.0.1",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "frontend-applications:serve": "nx run frontend-applications:serve:development",
+    "frontend-administration:serve": "nx run frontend-administration:serve:development",
+    "frontend-information:serve": "nx run frontend-information:serve:development",
+    "frontend-notifications:serve": "nx run frontend-notifications:serve:development",
+    "frontend-workspaces:serve": "nx run frontend-workspaces:serve:development",
+    "frontend-tabs:serve": "nx run frontend-tabs:serve:development",
+    "frontend-host:serve": "nx run frontend-host:serve:development"
+  },
   "private": true,
   "devDependencies": {
     "@angular-devkit/build-angular": "~15.1.0",

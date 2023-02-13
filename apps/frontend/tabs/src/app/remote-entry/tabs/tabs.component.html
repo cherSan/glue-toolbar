@@ -1,0 +1,60 @@
+<rubber-outlet>
+  <ui-header
+    [title]="'Tabs'"
+    [avatar]="{icon: 'layout'}"
+    [description]="currentTab?.name"
+    [back]="['toolbar']"
+    [relativeTo]="route.root"
+  >
+    <nz-button-group extra>
+      <button
+        nz-button
+      >
+        <span nz-icon nzType="save" nzTheme="outline"></span>
+      </button>
+      <button
+        nz-button
+      >
+        <span nz-icon nzType="plus" nzTheme="outline"></span>
+      </button>
+    </nz-button-group>
+    <nz-input-group nzSearch [nzAddOnAfter]="filterCategoryTpl">
+      <ng-template #filterCategoryTpl>
+        <button
+          nz-button
+          [nzSearch]="true"
+          [nzType]="'default'"
+          [routerLink]="['filter']"
+          [routerLinkActive]="'ant-btn-primary'"
+          [relativeTo]="route"
+        >
+          <span nz-icon nzType="filter" nzTheme="outline"></span>
+        </button>
+      </ng-template>
+      <input nz-input placeholder="Application filter" />
+    </nz-input-group>
+  </ui-header>
+  <div class="tabs">
+    <ng-container *ngFor="let tab of tabs">
+      <ui-navigation-item
+        [title]="tab.name"
+        [description]="'Applications: '+tab.components?.length"
+        [avatar]="{icon: 'layout'}"
+        [routerLink]="['details', tab.name]"
+        [routerLinkActive]="'active'"
+        [relativeTo]="route"
+      >
+        <nz-button-group [nzSize]="'small'">
+          <button
+            nz-button
+            [nzType]="'default'"
+            (click)="start(tab)"
+            [disabled]="currentTab?.name === tab.name"
+          >
+            <span nz-icon nzType="caret-right" nzTheme="outline"></span>
+          </button>
+        </nz-button-group>
+      </ui-navigation-item>
+    </ng-container>
+  </div>
+</rubber-outlet>

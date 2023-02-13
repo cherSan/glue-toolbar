@@ -5,7 +5,7 @@ import {catchError, first, firstValueFrom, forkJoin, from, Observable, of, switc
 import {Interops, Streams} from "@launchpad/frontend/glue/interops";
 import {Windows} from "@launchpad/frontend/glue/windows";
 import {Applications} from "@launchpad/frontend/glue/applications";
-import {GlueLayouts} from "./glue-layouts";
+import {Tabs} from "@launchpad/frontend/glue/tabs";
 @Injectable({
   providedIn: "root"
 })
@@ -14,8 +14,6 @@ export class GlueService {
   get glue(): Glue42.Glue { return this.glueValue }
   private myWindowValue!: Glue42.Windows.GDWindow;
   get myWindow(): Glue42.Windows.GDWindow { return this.myWindowValue }
-  private tabsValue!: GlueLayouts;
-  get tabs(): GlueLayouts { return this.tabsValue }
   public user?: string;
   public region?: string;
   public env?: string;
@@ -25,7 +23,8 @@ export class GlueService {
     public readonly streams: Streams,
     public readonly interops: Interops,
     public readonly windows: Windows,
-    public readonly applications: Applications
+    public readonly applications: Applications,
+    public readonly tabs: Tabs,
   ) {
   }
   initialize(): Observable<Glue42.Windows.GDWindow> {
@@ -53,14 +52,12 @@ export class GlueService {
         tap(() => {
           this.windows.initialize().subscribe();
           this.applications.initialize().subscribe();
+          this.tabs.initialize().subscribe();
         }),
         tap(() => {
           this.user = window.glue42gd?.env.windowsUserName;
           this.env = window.glue42gd?.env.env;
           this.region = window.glue42gd?.env.region;
-          if (!this.glue.userConfig?.gateway?.webPlatform) {
-            this.tabsValue = new GlueLayouts(this.glue);
-          }
         }),
         switchMap(() => {
           this.myWindowValue = this.glue.windows.my();
@@ -72,15 +69,5 @@ export class GlueService {
       )
     }
     return of(this.myWindowValue)
-  }
-  exit() {
-    firstValueFrom(this.tabsValue.currentLayout$)
-      .then(
-        (lo) => {
-          if (lo) return this.tabsValue.api.hibernate(lo?.name);
-          return Promise.resolve();
-        }
-      )
-      .then(() => this.myWindow.close())
   }
 }

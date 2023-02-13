@@ -23,6 +23,7 @@
       "@launchpad/frontend/glue/interops": [
         "libs/frontend/glue/interops/src/index.ts"
       ],
+      "@launchpad/frontend/glue/tabs": ["libs/frontend/glue/tabs/src/index.ts"],
       "@launchpad/frontend/glue/windows": [
         "libs/frontend/glue/windows/src/index.ts"
       ],
